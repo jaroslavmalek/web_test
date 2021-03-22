@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block cont %}
+   <div class="content-section">
+      <h2 class="account heading"> {{ user.username }} Profile</h2>
+      <p class="text-secondary">First name:{{ user.profile.member.first_name }}</p>
+      <p class="text-secondary">Last name:{{ user.profile.member.last_name}}</p>
+      <p class="text-secondary">Gender:{{ user.profile.member.gender}}</p>
+      <p class="text-secondary">Relationship:{{ user.profile.member.relation_status}}</p>
+   </div>
+   {% endblock %}

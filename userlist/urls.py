@@ -1,6 +1,8 @@
 from django.urls import path
-from . import views
+from .views import index, ActivityDetailView, MemberActivityCreateView
 
 urlpatterns = [
-    path('', views.index)
+    path('', index, name='home'),
+    path('activity/<int:pk>/', ActivityDetailView.as_view(), name='activity-detail'),
+    path('activity/join/', MemberActivityCreateView.as_view(), name='activity-join')
 ]

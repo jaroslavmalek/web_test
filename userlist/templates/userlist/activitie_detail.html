@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block cont %}
+<div class="content-section">
+    <h2 class="account heading"> Activity {{ object.activity_name }}</h2>
+        <p class="text-secondary">Description:{{ object.activity_description }}</p>
+        <p class="text-secondary">Activity leader:{{ object.activity_leader.last_name }} {{ object.activity_leader.first_name }}</p>
+        <p class="text-secondary">Activity leader email:{{ object.activity_leader.email }}</p>
+            {% if member_activity.member == user.profile.member %}
+            <p> You are on this activity since {{ member_activity.member_since|date:"F d, Y" }}</p>
+            {% else %}
+            <p class="text-secondary"><a class="ml-2" href="{% url 'activity-join' %}">Join activity</a></p>
+            {% endif %}
+</div>
+{% endblock %}

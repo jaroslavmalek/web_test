@@ -1,28 +1,32 @@
 {% extends 'base.html' %}
-
 {% block cont %}
-
-    <h1> The list of Users </h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Surname</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-        <tr>
-            <th scope="row">{{ user.id }}</th>
-            <td>{{ user.last_name}}</td>
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone_cell }}</td>
-        </tr>
+<h1> The list of Activities </h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Leader</th>
+        <th scope="col">My status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for activity in activities %}
+    <tr>
+        <th scope="row">{{ activity.id }}</th>
+        <td><a class="ml-2" href="{% url 'activity-detail' activity.id %}">{{ activity.activity_name}}</a></td>
+        <td>{{ activity.activity_description}}</td>
+        <td>{{ activity.activity_leader }}</td>
+        {% for member_activity in member_activities %}
+        {% if activity == member_activity.activity and member_activity.member == user.profile.member %}
+        <td>You are on this activity since {{ member_activity.member_since|date:"F d, Y" }}</td>
+        {% endif %}
         {% endfor %}
-        </tbody>
-    </table>
+    </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
+<p class="text-secondary"><a class="ml-2" href="{% url 'activity-join' %}">Join activity</a></p>
 {% endblock %}
